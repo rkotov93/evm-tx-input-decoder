@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
-require_relative "decoder/version"
+require_relative 'evm_tx/version'
 
 module EvmTx
   class Error < StandardError; end
-  # Your code goes here...
 end
