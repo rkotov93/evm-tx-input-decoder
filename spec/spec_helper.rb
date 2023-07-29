@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'evm/tx/decoder'
+require 'evm_tx'
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

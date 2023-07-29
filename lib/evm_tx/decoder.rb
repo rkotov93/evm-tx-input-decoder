@@ -1,22 +1,24 @@
 # frozen_string_literal: true
 
+require 'eth'
+
 module EvmTx
   class Decoder
     class << self
-      def decode_input(data, abi)
-        data = data[2..] if data.start_with?('0x')
+      def decode_input(input_data, abi)
+        input_data = input_data[2..] if input_data.start_with?('0x')
         definitions = method_definitions_by_id(abi)
 
-        method_id = data[0...8]
+        method_id = input_data[0...8]
         definition = definitions[method_id]
         return unless definition
 
-        args_data = data[8..]
+        args_data = input_data[8..]
         arg_types = definition['inputs'].map { |input| input['type'] }
         args = Eth::Abi.decode(arg_types, args_data)
 
         {
-          id: method_id,
+          id: "0x#{method_id}",
           name: definition['name'],
           arguments: args
         }
