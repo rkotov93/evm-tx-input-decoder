@@ -1,4 +1,4 @@
-# EVM Transactions Imput Decoder
+# EVM Transactions Input Decoder
 
 This is a simple gem that helps decoding and encoding transactions input data for EVM based blockchains like Ethereum and Tron.
 
