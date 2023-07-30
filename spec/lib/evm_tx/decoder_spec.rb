@@ -3,7 +3,7 @@
 require 'json'
 
 RSpec.describe EvmTx::Decoder do
-  describe '.decode_input' do
+  describe '#decode_input' do
     subject(:decode_input) { described_class.new(abi).decode_input(input_data) }
 
     context 'with Ethereum transaction' do
@@ -100,6 +100,21 @@ RSpec.describe EvmTx::Decoder do
           end
 
           it { is_expected.to have_attributes expected_result }
+        end
+      end
+    end
+
+    context 'with invalid data' do
+      let(:abi) { JSON.parse(File.read('spec/fixtures/abi/ethereum/usdt.json')) }
+
+      context 'with wrong method id' do
+        let(:input_data) do
+          '0xa8059cbb00000000000000000000000003cb76e200ba785f6008c12933aa3640536'\
+          'd2011000000000000000000000000000000000000000000000000000000a083712e00'
+        end
+
+        it 'raises an error' do
+          expect { decode_input }.to raise_error(EvmTx::Error, 'ABI does not contain method with a8059cbb ID')
         end
       end
     end

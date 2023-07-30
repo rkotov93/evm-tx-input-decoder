@@ -4,6 +4,7 @@ require 'eth'
 
 require_relative './function'
 require_relative './argument'
+require_relative './error'
 
 module EvmTx
   class Decoder
@@ -18,9 +19,9 @@ module EvmTx
       input_data = input_data[2..] if input_data.start_with?('0x')
       method_id = input_data[0...8]
       definition = method_definitions[method_id]
-      return unless definition
+      raise Error, "ABI does not contain method with #{method_id} ID" unless definition
 
-      Function.new("0x#{method_id}", definition['name'], extreact_arguments(input_data, definition))
+      Function.new("0x#{method_id}", definition['name'], extract_arguments(input_data, definition))
     end
 
     private
@@ -38,12 +39,12 @@ module EvmTx
     def calculate_method_id(method_definition)
       function_name = method_definition['name']
       arg_types = method_definition['inputs'].map { |input| input['type'] }.join(',')
-      signature = "#{function_name}(#{arg_types})"
+      function_signature = "#{function_name}(#{arg_types})"
 
-      Eth::Util.bin_to_hex(Eth::Util.keccak256(signature)[0...4])
+      Eth::Util.bin_to_hex(Eth::Util.keccak256(function_signature)[0...4])
     end
 
-    def extreact_arguments(input_data, definition)
+    def extract_arguments(input_data, definition)
       args_data = input_data[8..]
       arg_types = definition['inputs'].map { |input| input['type'] }
       arg_values = Eth::Abi.decode(arg_types, args_data)
