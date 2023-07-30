@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-# Specify your gem's dependencies in evm-tx-decoder.gemspec
+# Specify your gem's dependencies in emv-tx-inputs-decoder.gemspec
 gemspec
 
 gem 'rake', '~> 13.0'
