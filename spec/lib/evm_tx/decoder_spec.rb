@@ -4,7 +4,7 @@ require 'json'
 
 RSpec.describe EvmTx::Decoder do
   describe '.decode_input' do
-    subject(:decode_input) { described_class.decode_input(input_data, abi) }
+    subject(:decode_input) { described_class.new(abi).decode_input(input_data) }
 
     context 'with Ethereum transaction' do
       context 'with USDT contract' do

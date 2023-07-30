@@ -7,43 +7,49 @@ require_relative './argument'
 
 module EvmTx
   class Decoder
-    class << self
-      def decode_input(input_data, abi)
-        input_data = input_data[2..] if input_data.start_with?('0x')
-        definitions = method_definitions_by_id(abi)
+    attr_reader :abi, :method_definitions
 
-        method_id = input_data[0...8]
-        definition = definitions[method_id]
-        return unless definition
+    def initialize(abi)
+      @abi = abi
+      @method_definitions = method_definitions_by_id(abi)
+    end
 
-        args_data = input_data[8..]
-        arg_types = definition['inputs'].map { |input| input['type'] }
-        arg_values = Eth::Abi.decode(arg_types, args_data)
-        args = definition['inputs'].map.with_index do |input, i|
-          Argument.new(input['name'], input['type'], arg_values[i])
-        end
+    def decode_input(input_data)
+      input_data = input_data[2..] if input_data.start_with?('0x')
+      method_id = input_data[0...8]
+      definition = method_definitions[method_id]
+      return unless definition
 
-        Function.new("0x#{method_id}", definition['name'], args)
+      Function.new("0x#{method_id}", definition['name'], extreact_arguments(input_data, definition))
+    end
+
+    private
+
+    def method_definitions_by_id(abi)
+      abi.each_with_object({}) do |method_definition, obj|
+        type = method_definition['type']
+        next if %w[constructor event].include?(type)
+
+        method_id = calculate_method_id(method_definition)
+        obj[method_id] = method_definition
       end
+    end
 
-      private
+    def calculate_method_id(method_definition)
+      function_name = method_definition['name']
+      arg_types = method_definition['inputs'].map { |input| input['type'] }.join(',')
+      signature = "#{function_name}(#{arg_types})"
 
-      def generate_method_id(definition)
-        function_name = definition['name']
-        arg_types = definition['inputs'].map { |input| input['type'] }.join(',')
-        function = "#{function_name}(#{arg_types})"
+      Eth::Util.bin_to_hex(Eth::Util.keccak256(signature)[0...4])
+    end
 
-        Eth::Util.bin_to_hex(Eth::Util.keccak256(function)[0...4])
-      end
+    def extreact_arguments(input_data, definition)
+      args_data = input_data[8..]
+      arg_types = definition['inputs'].map { |input| input['type'] }
+      arg_values = Eth::Abi.decode(arg_types, args_data)
 
-      def method_definitions_by_id(abi)
-        abi.each_with_object({}) do |definition, obj|
-          type = definition['type']
-          next if %w[constructor event].include?(type)
-
-          method_id = generate_method_id(definition)
-          obj[method_id] = definition
-        end
+      definition['inputs'].map.with_index do |input, i|
+        Argument.new(input['name'], input['type'], arg_values[i])
       end
     end
   end
