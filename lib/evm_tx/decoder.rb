@@ -2,6 +2,9 @@
 
 require 'eth'
 
+require_relative './function'
+require_relative './argument'
+
 module EvmTx
   class Decoder
     class << self
@@ -15,13 +18,12 @@ module EvmTx
 
         args_data = input_data[8..]
         arg_types = definition['inputs'].map { |input| input['type'] }
-        args = Eth::Abi.decode(arg_types, args_data)
+        arg_values = Eth::Abi.decode(arg_types, args_data)
+        args = definition['inputs'].map.with_index do |input, i|
+          Argument.new(input['name'], input['type'], arg_values[i])
+        end
 
-        {
-          id: "0x#{method_id}",
-          name: definition['name'],
-          arguments: args
-        }
+        Function.new("0x#{method_id}", definition['name'], args)
       end
 
       private

@@ -20,11 +20,16 @@ RSpec.describe EvmTx::Decoder do
             {
               id: '0xa9059cbb',
               name: 'transfer',
-              arguments: ['0x03cb76e200ba785f6008c12933aa3640536d2011', 689_400_000_000]
+              arguments: match_array(
+                [
+                  have_attributes(name: '_to', type: 'address', value: '0x03cb76e200ba785f6008c12933aa3640536d2011'),
+                  have_attributes(name: '_value', type: 'uint256', value: 689_400_000_000)
+                ]
+              )
             }
           end
 
-          it { is_expected.to eq expected_result }
+          it { is_expected.to have_attributes expected_result }
         end
 
         context 'with `transferFrom` method' do
@@ -38,14 +43,14 @@ RSpec.describe EvmTx::Decoder do
               id: '0x23b872dd',
               name: 'transferFrom',
               arguments: [
-                '0x89960f47c5bf0126fb4d41755c8bdcb8c9368635',
-                '0xec30d02f10353f8efc9601371f56e808751f396f',
-                1_432_650_801
+                have_attributes(name: '_from', type: 'address', value: '0x89960f47c5bf0126fb4d41755c8bdcb8c9368635'),
+                have_attributes(name: '_to', type: 'address', value: '0xec30d02f10353f8efc9601371f56e808751f396f'),
+                have_attributes(name: '_value', type: 'uint256', value: 1_432_650_801)
               ]
             }
           end
 
-          it { is_expected.to eq expected_result }
+          it { is_expected.to have_attributes expected_result }
         end
       end
     end
@@ -60,16 +65,20 @@ RSpec.describe EvmTx::Decoder do
             'a9059cbb000000000000000000000041241fa3a3f9fe4c812e7e633ebd238a23975e'\
             'f6160000000000000000000000000000000000000000000000000000000006d348b0'
           end
-
           let(:expected_result) do
             {
               id: '0xa9059cbb',
               name: 'transfer',
-              arguments: ['0x241fa3a3f9fe4c812e7e633ebd238a23975ef616', 114_510_000]
+              arguments: match_array(
+                [
+                  have_attributes(name: '_to', type: 'address', value: '0x241fa3a3f9fe4c812e7e633ebd238a23975ef616'),
+                  have_attributes(name: '_value', type: 'uint256', value: 114_510_000)
+                ]
+              )
             }
           end
 
-          it { is_expected.to eq expected_result }
+          it { is_expected.to have_attributes expected_result }
         end
 
         context 'with `transferFrom` method' do
@@ -83,14 +92,14 @@ RSpec.describe EvmTx::Decoder do
               id: '0x23b872dd',
               name: 'transferFrom',
               arguments: [
-                '0x7d3835ed789d2696ba199de7e12b477eee750d23',
-                '0x68c635cde4e47c93ab742e05eec4ec98ce2cd0d0',
-                0
+                have_attributes(name: '_from', type: 'address', value: '0x7d3835ed789d2696ba199de7e12b477eee750d23'),
+                have_attributes(name: '_to', type: 'address', value: '0x68c635cde4e47c93ab742e05eec4ec98ce2cd0d0'),
+                have_attributes(name: '_value', type: 'uint256', value: 0)
               ]
             }
           end
 
-          it { is_expected.to eq expected_result }
+          it { is_expected.to have_attributes expected_result }
         end
       end
     end
