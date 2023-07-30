@@ -29,4 +29,35 @@ RSpec.describe EvmTx::Encoder do
       end
     end
   end
+
+  describe '.encode_function_signature' do
+    subject(:encode_function_signature) { described_class.encode_function_signature(function_name, types) }
+
+    context 'with `transfer`' do
+      let(:function_name) { 'transfer' }
+      let(:types) { %w[address uint256] }
+
+      it { is_expected.to eq 'a9059cbb' }
+    end
+
+    context 'with `transferFrom`' do
+      let(:function_name) { 'transferFrom' }
+      let(:types) { %w[address address uint256] }
+
+      it { is_expected.to eq '23b872dd' }
+    end
+  end
+
+  describe '.encode_input' do
+    subject(:encode_input) { described_class.encode_input(function_name, types, args) }
+    let(:function_name) { 'transfer' }
+    let(:types) { %w[address uint256] }
+    let(:args) { ['0x03cb76e200ba785f6008c12933aa3640536d2011', 689_400_000_000] }
+    let(:expected_result) do
+      '0xa9059cbb00000000000000000000000003cb76e200ba785f6008c12933aa3640536'\
+      'd2011000000000000000000000000000000000000000000000000000000a083712e00'
+    end
+
+    it { is_expected.to eq expected_result }
+  end
 end
