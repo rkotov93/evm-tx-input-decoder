@@ -3,7 +3,7 @@
 module EvmTx
   class Encoder
     class << self
-      def encode_inputs(types, args)
+      def encode_parameters(types, args)
         Eth::Abi.encode(types, args).unpack1('H*')
       end
     end
