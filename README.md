@@ -4,7 +4,9 @@ This is a simple gem that helps decoding and encoding transactions input data fo
 
 ## Installation
 
+```ruby
 gem 'emv-tx-inputs-decoder'
+```
 
 ## Usage
 
