@@ -18,7 +18,7 @@ RSpec.describe EvmTx::Decoder do
           end
           let(:expected_result) do
             {
-              id: '0xa9059cbb',
+              id: 'a9059cbb',
               name: 'transfer',
               arguments: match_array(
                 [
@@ -40,7 +40,7 @@ RSpec.describe EvmTx::Decoder do
           end
           let(:expected_result) do
             {
-              id: '0x23b872dd',
+              id: '23b872dd',
               name: 'transferFrom',
               arguments: [
                 have_attributes(name: '_from', type: 'address', value: '0x89960f47c5bf0126fb4d41755c8bdcb8c9368635'),
@@ -67,7 +67,7 @@ RSpec.describe EvmTx::Decoder do
           end
           let(:expected_result) do
             {
-              id: '0xa9059cbb',
+              id: 'a9059cbb',
               name: 'transfer',
               arguments: match_array(
                 [
@@ -89,7 +89,7 @@ RSpec.describe EvmTx::Decoder do
           end
           let(:expected_result) do
             {
-              id: '0x23b872dd',
+              id: '23b872dd',
               name: 'transferFrom',
               arguments: [
                 have_attributes(name: '_from', type: 'address', value: '0x7d3835ed789d2696ba199de7e12b477eee750d23'),

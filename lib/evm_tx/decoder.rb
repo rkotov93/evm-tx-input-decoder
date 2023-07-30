@@ -21,7 +21,7 @@ module EvmTx
       definition = method_definitions[method_id]
       raise Error, "ABI does not contain method with #{method_id} ID" unless definition
 
-      Function.new("0x#{method_id}", definition['name'], extract_arguments(input_data, definition))
+      Function.new(method_id, definition['name'], extract_arguments(input_data, definition))
     end
 
     private
