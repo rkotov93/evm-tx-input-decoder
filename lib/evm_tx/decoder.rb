@@ -29,7 +29,7 @@ module EvmTx
     def method_definitions_by_id(abi)
       abi.each_with_object({}) do |method_definition, obj|
         type = method_definition['type']
-        next if %w[constructor event].include?(type)
+        next if %w[event].include?(type)
 
         method_id = calculate_method_id(method_definition)
         obj[method_id] = method_definition
