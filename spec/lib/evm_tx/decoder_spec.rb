@@ -2,7 +2,7 @@
 
 require 'json'
 
-RSpec.describe EvmTx::Decoder do
+RSpec.describe EvmTxInput::Decoder do
   describe '#decode_input' do
     subject(:decode_input) { described_class.new(abi).decode_input(input_data) }
 
@@ -114,7 +114,7 @@ RSpec.describe EvmTx::Decoder do
         end
 
         it 'raises an error' do
-          expect { decode_input }.to raise_error(EvmTx::Error, 'ABI does not contain method with a8059cbb ID')
+          expect { decode_input }.to raise_error(EvmTxInput::Error, 'ABI does not contain method with a8059cbb ID')
         end
       end
     end

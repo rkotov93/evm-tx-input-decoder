@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require_relative 'lib/evm_tx/version'
+require_relative 'lib/evm_tx_input/version'
 
 Gem::Specification.new do |spec|
   spec.name = 'evm-tx-input-decoder'
-  spec.version = EvmTx::VERSION
+  spec.version = EvmTxInput::VERSION
   spec.authors = ['Ruslan Kotov']
   spec.email = ['rkotov93@gmail.com']
 

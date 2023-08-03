@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module EvmTx
+module EvmTxInput
   # A class containing a set of helpers to decode transactions input data
   # into human-readable values by provided contract's ABI
   #
@@ -9,7 +9,7 @@ module EvmTx
   class Decoder
     attr_reader :abi, :method_definitions
 
-    # Constructor of EvmTx::Decoder
+    # Constructor of EvmTxInput::Decoder
     #
     # @param abi [Hash] parsed contract ABI
     def initialize(abi = {})
@@ -20,7 +20,7 @@ module EvmTx
     # Decodes transaction input data
     #
     # @param input_data [String] binary encoded input data from transaction
-    # @return [EvmTx::Function]
+    # @return [EvmTxInput::Function]
     def decode_input(input_data)
       input_data = input_data[2..] if input_data.start_with?('0x')
       method_id = input_data[0...8]

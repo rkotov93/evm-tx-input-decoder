@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
-module EvmTx
+module EvmTxInput
   class Error < StandardError; end
 end

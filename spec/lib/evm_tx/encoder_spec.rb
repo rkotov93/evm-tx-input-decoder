@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe EvmTx::Encoder do
+RSpec.describe EvmTxInput::Encoder do
   describe '.encode_parameters' do
     subject(:encode_parameters) { described_class.encode_parameters(types, args) }
 

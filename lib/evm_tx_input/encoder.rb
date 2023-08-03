@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module EvmTx
+module EvmTxInput
   # A class containing a set of helpers to encode human-readable values
   # to binary transactions input data
   class Encoder

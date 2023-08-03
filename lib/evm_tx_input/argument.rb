@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module EvmTx
+module EvmTxInput
   # Represents decoded smart contract function arguments
   #
   # @attr_reader name [String] name of function argument
