@@ -11,16 +11,34 @@ gem 'emv-tx-inputs-decoder'
 ## Usage
 
 ### Decoding
+Let's consider decoding process by example [USDT transaction](https://etherscan.io/tx/0x93ae1b191189aa27833b65f3668ae7704f9b7d9badabf4a9a16e53d84e1a3472) in an Ethereum blockchain.
+
+The input data is `0xa9059cbb00000000000000000000000003cb76e200ba785f6008c12933aa3640536d2011000000000000000000000000000000000000000000000000000000a083712e00`, which can be found in `More details` section.
+
+The USDT token ABI can be found by [this url](http://api.etherscan.io/api?module=contract&action=getabi&address=0xdac17f958d2ee523a2206206994597c13d831ec7&format=raw)
+
 ```ruby
+json = URI.open('http://api.etherscan.io/api?module=contract&action=getabi&address=0xdac17f958d2ee523a2206206994597c13d831ec7&format=raw') { |file| jsonfile.read }
+abi = JSON.parse()
 input = '0xa9059cbb00000000000000000000000003cb76e200ba785f6008c12933aa3640536d2011000000000000000000000000000000000000000000000000000000a083712e00'
-EmvTx::Decoder.new(abi).decode_input(input)
+
+function = EvmTx::Decoder.new(abi).decode_input(input)
+function.id #=> "a9059cbb"
+function.name #=> "transfer"
+function.arguments
+# [#<EvmTx::Argument:0x00000001107ffa60 @name="_to", @type="address", @value="0x03cb76e200ba785f6008c12933aa3640536d2011">,
+#  #<EvmTx::Argument:0x00000001107ffa10 @name="_value", @type="uint256", @value=689400000000>]
 ```
 
 ### Encoding
+Following decoding procedure let's encode the previous result.
+
 ```ruby
+function_name = 'transfer'
 types = %w[address uint256]
-args = ['0x03cb76e200ba785f6008c12933aa3640536d2011', 10000]
-EvmTx::Encoder.encode_parameters(types, args)
+args = ['0x03cb76e200ba785f6008c12933aa3640536d2011', 689400000000]
+EvmTx::Encoder.encode_input(function_name, types, args)
+#=> "0xa9059cbb00000000000000000000000003cb76e200ba785f6008c12933aa3640536d2011000000000000000000000000000000000000000000000000000000a083712e00"
 ```
 
 ## Development
