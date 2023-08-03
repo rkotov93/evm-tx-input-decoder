@@ -3,15 +3,15 @@
 This is a simple gem that helps decoding and encoding transactions input data for EVM based blockchains like Ethereum and Tron.
 
 ## Installation
+Run
 ```bash
 gem install emv-tx-inputs-decoder
 ```
-
-or
-
+or add
 ```ruby
 gem 'emv-tx-inputs-decoder'
 ```
+to your Gemfile.
 
 ## Usage
 
