@@ -46,6 +46,8 @@ EvmTx::Encoder.encode_input(function_name, types, args)
 #=> "0xa9059cbb00000000000000000000000003cb76e200ba785f6008c12933aa3640536d2011000000000000000000000000000000000000000000000000000000a083712e00"
 ```
 
+For more details read the [documentation](https://rubydoc.info/github/rkotov93/evm-tx-inputs-decoder/main/EvmTx).
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
