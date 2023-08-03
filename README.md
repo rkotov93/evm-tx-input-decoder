@@ -5,11 +5,11 @@ This is a simple gem that helps decoding and encoding transactions input data fo
 ## Installation
 Run
 ```bash
-gem install emv-tx-inputs-decoder
+gem install evm-tx-inputs-decoder
 ```
 or add
 ```ruby
-gem 'emv-tx-inputs-decoder'
+gem 'evm-tx-inputs-decoder'
 ```
 to your Gemfile.
 
