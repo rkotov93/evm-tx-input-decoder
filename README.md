@@ -23,7 +23,8 @@ The input data is `0xa9059cbb00000000000000000000000003cb76e200ba785f6008c12933a
 The USDT token ABI can be found by [this url](http://api.etherscan.io/api?module=contract&action=getabi&address=0xdac17f958d2ee523a2206206994597c13d831ec7&format=raw)
 
 ```ruby
-require 'evm_tx'
+require 'open-uri'
+require 'evm_tx_input'
 
 json = URI.open('http://api.etherscan.io/api?module=contract&action=getabi&address=0xdac17f958d2ee523a2206206994597c13d831ec7&format=raw') { |file| jsonfile.read }
 abi = JSON.parse(json)
@@ -41,7 +42,7 @@ function.arguments
 Following decoding procedure let's encode the previous result.
 
 ```ruby
-require 'evm_tx'
+require 'evm_tx_input'
 
 function_name = 'transfer'
 types = %w[address uint256]
