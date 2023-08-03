@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.authors = ['Ruslan Kotov']
   spec.email = ['rkotov93@gmail.com']
 
-  spec.summary = 'A simple gem that helps decoding and encoding transactions input data'\
-                 'for EVM based blockchains likeEthereum and Tron.'
-  # spec.description = 'Write a longer description or delete this line.'
+  spec.summary = 'Simple gem to decode and encode EVM transactions input data'
+  spec.description = 'This is a simple gem that helps decoding and encoding transactions input data'\
+                     'for EVM based blockchains like Ethereum and Tron.'
   spec.homepage = 'https://github.com/rkotov93/evm-tx-inputs-decoder'
   spec.license = 'MIT'
   spec.required_ruby_version = '>= 2.7.0'
