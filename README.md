@@ -5,11 +5,11 @@ This is a simple gem that helps decoding and encoding transactions input data fo
 ## Installation
 Run
 ```bash
-gem install evm-tx-inputs-decoder
+gem install evm-tx-input-decoder
 ```
 or add
 ```ruby
-gem 'evm-tx-inputs-decoder'
+gem 'evm-tx-input-decoder'
 ```
 to your Gemfile.
 
@@ -46,7 +46,7 @@ EvmTx::Encoder.encode_input(function_name, types, args)
 #=> "0xa9059cbb00000000000000000000000003cb76e200ba785f6008c12933aa3640536d2011000000000000000000000000000000000000000000000000000000a083712e00"
 ```
 
-For more details read the [documentation](https://rubydoc.info/github/rkotov93/evm-tx-inputs-decoder/main/EvmTx).
+For more details read the [documentation](https://rubydoc.info/github/rkotov93/evm-tx-input-decoder/main/EvmTx).
 
 ## Development
 
@@ -56,7 +56,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/rkotov93/evm-tx-inputs-decoder.
+Bug reports and pull requests are welcome on GitHub at https://github.com/rkotov93/evm-tx-input-decoder.
 
 ## License
 

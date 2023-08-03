@@ -3,7 +3,7 @@
 require_relative 'lib/evm_tx/version'
 
 Gem::Specification.new do |spec|
-  spec.name = 'evm-tx-inputs-decoder'
+  spec.name = 'evm-tx-input-decoder'
   spec.version = EvmTx::VERSION
   spec.authors = ['Ruslan Kotov']
   spec.email = ['rkotov93@gmail.com']
@@ -11,15 +11,15 @@ Gem::Specification.new do |spec|
   spec.summary = 'Simple gem to decode and encode EVM transactions input data'
   spec.description = 'This is a simple gem that helps decoding and encoding transactions input data'\
                      'for EVM based blockchains like Ethereum and Tron.'
-  spec.homepage = 'https://github.com/rkotov93/evm-tx-inputs-decoder'
+  spec.homepage = 'https://github.com/rkotov93/evm-tx-input-decoder'
   spec.license = 'MIT'
   spec.required_ruby_version = '>= 2.7.0'
 
   # spec.metadata['allowed_push_host'] = "Set to your gem server 'https://example.com'"
 
   spec.metadata['homepage_uri'] = spec.homepage
-  spec.metadata['source_code_uri'] = 'https://github.com/rkotov93/evm-tx-inputs-decoder'
-  spec.metadata['changelog_uri'] = 'https://github.com/rkotov93/evm-tx-inputs-decoder/CHANGELOG.md'
+  spec.metadata['source_code_uri'] = 'https://github.com/rkotov93/evm-tx-input-decoder'
+  spec.metadata['changelog_uri'] = 'https://github.com/rkotov93/evm-tx-input-decoder/CHANGELOG.md'
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
