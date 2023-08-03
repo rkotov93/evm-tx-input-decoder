@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    evm-tx-input-decoder (0.1.0)
+    evm-tx-input-decoder (0.1.1)
       eth (~> 0.5)
 
 GEM

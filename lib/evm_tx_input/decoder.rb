@@ -11,8 +11,8 @@ module EvmTxInput
 
     # Constructor of EvmTxInput::Decoder
     #
-    # @param abi [Hash] parsed contract ABI
-    def initialize(abi = {})
+    # @param abi [Array] parsed contract ABI
+    def initialize(abi = [])
       @abi = abi
       @method_definitions = method_definitions_by_id(abi)
     end
